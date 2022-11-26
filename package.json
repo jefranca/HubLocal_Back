@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node ./src/server.ts",
-    "start:dev": "ts-node ./src/server.ts",
+    "start:dev": "npx nodemon --watch \"src/**\" --ext \"ts,json\" --exec \"ts-node src/server.ts\"",
     "test": "npx jest",
     "test:watch": "npx jest --watch"
   },
