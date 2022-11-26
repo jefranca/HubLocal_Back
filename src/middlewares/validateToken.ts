@@ -16,7 +16,7 @@ export default async function validateToken(req: Request, res: Response, next: N
     return res.status(401).send('Invalid token!');
   }
 
-  res.locals.user_id = session.userId;
+  res.locals.userId = session.userId;
 
   next();
 }
