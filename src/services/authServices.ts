@@ -11,13 +11,13 @@ const { PrismaClient } = pkg;
 const prisma = new PrismaClient();
 
 
-async function signUp({email,password}:user) {
+async function signUp({ email, password }: user) {
   const hash = bcrypt.hashSync(password, 8);
   const user = await prisma.user.findUnique({
     where: { email }
   })
 
-  if(user) throw new AccountDuplicated("This e-mail is already being used.");
+  if (user) throw new AccountDuplicated("This e-mail is already being used.");
 
   await prisma.user.create({
     data: {
@@ -27,16 +27,14 @@ async function signUp({email,password}:user) {
   })
 }
 
-async function signIn({email,password}:user) {
+async function signIn({ email, password }: user) {
 
   const user = await prisma.user.findUnique({
     where: { email }
   })
 
-  console.log(user)
-
-  if (!user)  throw new EmaildDoesNotExist("This e-mail does not exist");
-  if (user && !bcrypt.compareSync(password, user.password))  throw new WrongEmailOrPassword("e-mail or password is invalid");
+  if (!user) throw new EmaildDoesNotExist("This e-mail does not exist");
+  if (user && !bcrypt.compareSync(password, user.password)) throw new WrongEmailOrPassword("e-mail or password is invalid");
 
   const token = uuid();
 
@@ -48,4 +46,13 @@ async function signIn({email,password}:user) {
   })
 }
 
-export {signUp, signIn}
+async function logout(token: string | undefined) {
+
+  await prisma.session.delete({
+    where: {
+      token
+    }
+  })
+}
+
+export { signUp, signIn, logout }

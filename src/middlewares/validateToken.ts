@@ -8,8 +8,9 @@ export default async function validateToken(req: Request, res: Response, next: N
   const token = req.headers.authorization?.split('Bearer ')[1];
   const session = await prisma.session.findUnique({
     where: {
-      token,
-    }});
+      token
+    }
+  });
 
   if (!session) {
     return res.status(401).send('Invalid token!');
