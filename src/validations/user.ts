@@ -1,12 +1,12 @@
 
 import ValidationError from "../errors/ValidationError";
-import { newUser } from "../interfaces/newUser";
+import { user } from "../interfaces/user";
 import * as schemas from "./schemas";
 
-async function validateNewUser(user: newUser) {
+async function validateUser(user: user) {
   const joiValidation = schemas.userSchema.validate(user);
   if (joiValidation.error)
     throw new ValidationError(joiValidation.error.details[0].message);
 }
 
-export { validateNewUser };
+export { validateUser };
