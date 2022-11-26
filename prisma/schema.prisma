@@ -11,68 +11,68 @@ datasource db {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
-  email    String   @unique
+  id       Int       @id @default(autoincrement())
+  email    String    @unique
   password String
-  session Session[]
-  company Company[]
+  session  Session[]
+  company  Company[]
 }
 
-model Session{
-  id       Int      @id @default(autoincrement())
-  token    String   @unique
-  userId   Int
-  user     User   @relation(fields: [userId], references: [id])
+model Session {
+  id     Int    @id @default(autoincrement())
+  token  String @unique
+  userId Int
+  user   User   @relation(fields: [userId], references: [id])
 }
 
-model Company{
-  id          Int      @id @default(autoincrement())
+model Company {
+  id          Int           @id @default(autoincrement())
   name        String
   cnpj        Int
   description String
   userId      Int
-  user        User   @relation(fields: [userId], references: [id])
+  user        User          @relation(fields: [userId], references: [id])
   mainLocalId Int
   local       Local[]
   responsible Responsible[]
 }
 
-model Local{
-  id            Int   @id @default(autoincrement())
-  name          String
-  companyId     Int
-  adress        String
-  city          String
-  state         String
-  cep           Int
+model Local {
+  id                Int           @id @default(autoincrement())
+  name              String
+  companyId         Int
+  adress            String
+  city              String
+  state             String
+  cep               Int
   mainresponsibleId Int
-  company       Company @relation(fields: [companyId], references: [id])
-  responsible   Responsible[]
-  ticket        Ticket[]
+  company           Company       @relation(fields: [companyId], references: [id])
+  responsible       Responsible[]
+  ticket            Ticket[]
 }
 
-model Responsible{
-  id            Int      @id @default(autoincrement())
-  name          String
-  phone         Int
-  adress        String
-  city          String
-  state         String
-  cep           Int
-  companyId     Int
-  localId       Int
-  company Company @relation(fields: [companyId], references: [id])
-  local Local @relation(fields: [localId], references: [id]) 
+model Responsible {
+  id        Int     @id @default(autoincrement())
+  name      String
+  phone     Int
+  adress    String
+  city      String
+  state     String
+  cep       Int
+  companyId Int
+  localId   Int
+  company   Company @relation(fields: [companyId], references: [id])
+  local     Local   @relation(fields: [localId], references: [id])
 }
 
-model Ticket{
-  id              Int @id
-  title           String
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  UserCreatorId   Int
-  UserResponseId  Int
-  status          String
-  localId         Int
-  local Local @relation(fields: [localId], references: [id]) 
+model Ticket {
+  id             Int      @id
+  title          String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  UserCreatorId  Int
+  UserResponseId Int
+  status         String
+  localId        Int
+  local          Local    @relation(fields: [localId], references: [id])
 }
