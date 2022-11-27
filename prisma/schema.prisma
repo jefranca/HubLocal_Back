@@ -28,11 +28,11 @@ model Session {
 model Company {
   id          Int           @id @default(autoincrement())
   name        String
-  cnpj        Int
+  cnpj        String
   description String
   userId      Int
   user        User          @relation(fields: [userId], references: [id])
-  mainLocalId Int
+  mainLocalId Int?
   local       Local[]
   responsible Responsible[]
 }
@@ -44,8 +44,8 @@ model Local {
   adress            String
   city              String
   state             String
-  cep               Int
-  mainresponsibleId Int
+  cep               String
+  mainresponsibleId Int?
   company           Company       @relation(fields: [companyId], references: [id])
   responsible       Responsible[]
   ticket            Ticket[]
@@ -54,11 +54,11 @@ model Local {
 model Responsible {
   id        Int     @id @default(autoincrement())
   name      String
-  phone     Int
+  phone     String
   adress    String
   city      String
   state     String
-  cep       Int
+  cep       String
   companyId Int
   localId   Int
   company   Company @relation(fields: [companyId], references: [id])
