@@ -38,7 +38,7 @@ async function postCompany(name: any, cnpj: any, description: any, local: any, r
     .then((res) => { localAdress = res.data })
     .catch((err) => console.error(err))
 
-    await getAdress(responsible.cep)
+  await getAdress(responsible.cep)
     .then((res) => { responsibleAdress = res.data })
     .catch((err) => console.error(err))
 
@@ -77,18 +77,18 @@ async function postCompany(name: any, cnpj: any, description: any, local: any, r
 
   await prisma.local.updateMany({
     where: {
-      id : newLocal.id
+      id: newLocal.id
     },
-    data : {
+    data: {
       mainresponsibleId: newResponsible.id
     }
   })
 
   await prisma.company.updateMany({
     where: {
-      id : newCompany.id
+      id: newCompany.id
     },
-    data : {
+    data: {
       mainLocalId: newLocal.id
     }
   })
