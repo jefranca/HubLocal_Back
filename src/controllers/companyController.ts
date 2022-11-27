@@ -31,4 +31,16 @@ async function getOneCompanyWithRelations(req: Request, res: Response, next: Nex
   }
 }
 
-export {getCompany, getOneCompanyWithRelations}
+async function postCompany(req: Request, res: Response, next: NextFunction) {
+  const {name,cnpj,description,local,responsible} = req.body;
+  const {userId} = res.locals
+
+  try {
+    await companyService.postCompany(name,cnpj,description,local,responsible,userId)
+    res.sendStatus(201)
+  } catch (error) {
+    next(error);
+  }
+}
+
+export {getCompany, getOneCompanyWithRelations, postCompany}
