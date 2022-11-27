@@ -6,7 +6,7 @@ const router = new (Router as any)();
 
 router.use(validateToken);
 router.get('',companyContoller.getCompany);
-router.get('/local-responsible',companyContoller.getOneCompanyWithRelations);
+router.post('/local-responsible',companyContoller.getOneCompanyWithRelations);
 router.post('', companyContoller.postCompany);
 router.put('',);
 router.delete('',);
