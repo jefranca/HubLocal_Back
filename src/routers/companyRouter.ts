@@ -5,8 +5,9 @@ import * as companyContoller from "../controllers/companyController";
 const router = new (Router as any)();
 
 router.use(validateToken);
-router.get('',companyContoller.getOneCompanyWithRelations);
-router.post('',);
+router.get('',companyContoller.getCompany);
+router.post('/local-responsible',companyContoller.getOneCompanyWithRelations);
+router.post('', companyContoller.postCompany);
 router.put('',);
 router.delete('',);
 

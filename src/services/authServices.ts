@@ -44,6 +44,8 @@ async function signIn({ email, password }: user) {
       userId: user.id
     },
   })
+
+  return token
 }
 
 async function logout(token: string | undefined) {
